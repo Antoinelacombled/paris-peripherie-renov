@@ -49,7 +49,7 @@ const Process = () => {
     },
     {
       title: 'Réalisation',
-      description: 'Notre équipe d'artisans exécute votre projet avec précision et dans le respect des délais convenus.',
+      description: "Notre équipe d'artisans exécute votre projet avec précision et dans le respect des délais convenus.",
       icon: Home
     }
   ];

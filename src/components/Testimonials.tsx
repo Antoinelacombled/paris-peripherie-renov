@@ -65,19 +65,19 @@ const Testimonials = () => {
       name: 'Sophie Martin',
       location: 'Paris 16ème',
       stars: 5,
-      text: 'Un travail d'une qualité exceptionnelle. Ma cuisine est désormais l'espace dont j'ai toujours rêvé. Leur équipe a été d'un professionnalisme irréprochable tout au long du projet.'
+      text: "Un travail d'une qualité exceptionnelle. Ma cuisine est désormais l'espace dont j'ai toujours rêvé. Leur équipe a été d'un professionnalisme irréprochable tout au long du projet."
     },
     {
       name: 'Pierre Durand',
       location: 'Neuilly-sur-Seine',
       stars: 5,
-      text: 'Nous avons confié la rénovation complète de notre appartement à Paris Périphérie Rénovation et nous sommes ravis du résultat. Un travail de grande qualité, dans les délais et le budget annoncés.'
+      text: "Nous avons confié la rénovation complète de notre appartement à Paris Périphérie Rénovation et nous sommes ravis du résultat. Un travail de grande qualité, dans les délais et le budget annoncés."
     },
     {
       name: 'Marie Lefort',
       location: 'Boulogne-Billancourt',
       stars: 5,
-      text: 'Un grand merci à toute l'équipe pour la transformation de notre maison. Le résultat dépasse nos attentes. Chaque détail a été soigneusement pensé et exécuté.'
+      text: "Un grand merci à toute l'équipe pour la transformation de notre maison. Le résultat dépasse nos attentes. Chaque détail a été soigneusement pensé et exécuté."
     }
   ];
 
