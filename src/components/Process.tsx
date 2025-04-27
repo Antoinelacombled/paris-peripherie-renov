@@ -35,23 +35,23 @@ const Process = () => {
     {
       title: 'Consultation',
       description: 'Discutons de votre projet. Nous définissons vos besoins et vos objectifs pour votre rénovation.',
-      icon: Phone,
+      icon: Phone
     },
     {
       title: 'Visite technique',
       description: 'Nous examinons votre espace pour évaluer les travaux nécessaires et identifier les contraintes techniques.',
-      icon: Clipboard,
+      icon: Clipboard
     },
     {
       title: 'Devis détaillé',
       description: 'Nous vous fournissons un devis transparent et détaillé, avec toutes les étapes du projet clairement définies.',
-      icon: FileText,
+      icon: FileText
     },
     {
       title: 'Réalisation',
       description: 'Notre équipe d'artisans exécute votre projet avec précision et dans le respect des délais convenus.',
-      icon: Home,
-    },
+      icon: Home
+    }
   ];
 
   return (
