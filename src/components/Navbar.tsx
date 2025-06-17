@@ -120,7 +120,7 @@ const Navbar = () => {
             )}
           >
             <Phone size={18} />
-            <span>01.23.45.67.89</span>
+            <span> 06 05 70 83 76</span>
           </a>
         </div>
 
@@ -213,7 +213,7 @@ const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Phone size={18} />
-                <span>01.23.45.67.89</span>
+                <span>06 05 70 83 76</span>
               </a>
             </li>
           </ul>

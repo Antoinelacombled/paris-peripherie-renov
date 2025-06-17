@@ -15,32 +15,32 @@ const Gallery = () => {
   const images: GalleryImage[] = [
     {
       src: "/gallery1.jpeg",
-      alt: "Salon après rénovation",
-      category: "salon",
+      alt: "Espace commercial",
+      category: "espace commercial",
     },
     {
       src: "/gallery2.jpeg",
-      alt: "Cuisine moderne rénovée",
-      category: "cuisine",
+      alt: "Salle de bain rénovée",
+      category: "salle de bain",
     },
     {
       src: "/gallery3.jpeg",
-      alt: "Salle de bain design",
-      category: "salle-de-bain",
+      alt: "Salon rénové à neuf",
+      category: "salon",
     },
     {
       src: "/gallery4.jpeg",
-      alt: "Chambre rénovée",
-      category: "chambre",
+      alt: "Cuisine rénovée",
+      category: "cuisine",
     },
     {
       src: "/gallery5.jpg",
-      alt: "Détail de cuisine",
+      alt: "Planché chauffant",
       category: "cuisine",
     },
     {
       src: "/gallery6.jpg",
-      alt: "Salon avec cheminée",
+      alt: "Meubles sur mesure",
       category: "salon",
     },
   ];
@@ -55,13 +55,13 @@ const Gallery = () => {
     ...Array.from(new Set(images.map((img) => img.category))),
   ];
 
-  const categoryLabels: Record<string, string> = {
-    all: "Tous",
-    salon: "Salons",
-    cuisine: "Cuisines",
-    "salle-de-bain": "Salles de bain",
-    chambre: "Chambres",
-  };
+  // const categoryLabels: Record<string, string> = {
+  //   all: "Tous",
+  //   salon: "Salons",
+  //   cuisine: "Cuisines",
+  //   "salle-de-bain": "Salles de bain",
+  //   chambre: "Chambres",
+  // };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -112,7 +112,7 @@ const Gallery = () => {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center mb-16 gap-3 md:gap-4 reveal">
+        {/* <div className="flex flex-wrap justify-center mb-16 gap-3 md:gap-4 reveal">
           {categories.map((category) => (
             <button
               key={category}
@@ -127,7 +127,7 @@ const Gallery = () => {
               {categoryLabels[category] || category}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

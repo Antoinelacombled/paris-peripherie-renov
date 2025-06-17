@@ -41,7 +41,7 @@ const Index = () => {
       <Hero />
       <WhyChooseUs />
       <Expertise />
-      <BeforeAfter />
+      {/* <BeforeAfter /> */}
       <Testimonials />
       <Gallery />
       <Process />

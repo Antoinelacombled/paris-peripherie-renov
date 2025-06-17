@@ -41,7 +41,7 @@ const Footer = () => {
                   href="tel:+33123456789"
                   className="text-paris-grey/90 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
                 >
-                  01.23.45.67.89
+                  06 05 70 83 76
                   <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
                 </a>
               </div>
