@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Petit+Formal+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Petit+Formal+Script&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -133,4 +132,31 @@
   .container-padding {
     @apply px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20;
   }
+}
+
+/* Signature Animation */
+.signature-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawSignature 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes drawSignature {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.active {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
