@@ -1,10 +1,29 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Phone, Mail, Clock, ChevronRight } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_CONFIG } from "../config/emailjs";
 
 const ContactCTA = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState<{
+    message: string;
+    type: "success" | "error" | null;
+  }>({ message: "", type: null });
+
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    project: "",
+    message: "",
+  });
 
   useEffect(() => {
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -21,6 +40,8 @@ const ContactCTA = () => {
       { threshold: 0.2 }
     );
 
+    console.log(EMAILJS_CONFIG.SERVICE_ID);
+
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
@@ -29,6 +50,56 @@ const ContactCTA = () => {
       observer.disconnect();
     };
   }, []);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const result = await emailjs.sendForm(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        formRef.current!,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+
+      if (result.text === "OK") {
+        setFormStatus({
+          message:
+            "Votre message a été envoyé avec succès ! Nous vous contacterons bientôt.",
+          type: "success",
+        });
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          project: "",
+          message: "",
+        });
+      }
+    } catch (error) {
+      console.error("Erreur EmailJS:", error);
+      setFormStatus({
+        message:
+          "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
+        type: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section
@@ -113,7 +184,7 @@ const ContactCTA = () => {
                 Demande de devis
                 <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-paris-orange"></span>
               </h3>
-              <form className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
@@ -125,8 +196,12 @@ const ContactCTA = () => {
                     <input
                       type="text"
                       id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
                       placeholder="Votre nom"
+                      required
                     />
                   </div>
 
@@ -140,8 +215,12 @@ const ContactCTA = () => {
                     <input
                       type="tel"
                       id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
                       placeholder="Votre téléphone"
+                      required
                     />
                   </div>
                 </div>
@@ -156,8 +235,12 @@ const ContactCTA = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
                     placeholder="Votre email"
+                    required
                   />
                 </div>
 
@@ -170,7 +253,11 @@ const ContactCTA = () => {
                   </label>
                   <select
                     id="project"
+                    name="project"
+                    value={formData.project}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
+                    required
                   >
                     <option value="">Sélectionnez le type de projet</option>
                     <option value="apartment">Rénovation d'appartement</option>
@@ -189,18 +276,39 @@ const ContactCTA = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     rows={4}
                     className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
                     placeholder="Décrivez votre projet..."
+                    required
                   ></textarea>
                 </div>
+
+                {formStatus.message && (
+                  <div
+                    className={`p-4 rounded-sm ${
+                      formStatus.type === "success"
+                        ? "bg-green-50 text-green-800"
+                        : "bg-red-50 text-red-800"
+                    }`}
+                  >
+                    {formStatus.message}
+                  </div>
+                )}
 
                 <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full py-4 bg-paris-navy hover:bg-paris-orange text-white font-medium rounded-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg"
+                    disabled={isSubmitting}
+                    className={`w-full py-4 bg-paris-navy hover:bg-paris-orange text-white font-medium rounded-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg ${
+                      isSubmitting ? "opacity-75 cursor-not-allowed" : ""
+                    }`}
                   >
-                    Demander un devis gratuit
+                    {isSubmitting
+                      ? "Envoi en cours..."
+                      : "Demander un devis gratuit"}
                   </button>
                   <p className="text-sm text-paris-grey mt-4 text-center">
                     Notre agenda se remplit rapidement — sécurisez votre projet
