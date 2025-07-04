@@ -169,7 +169,7 @@ const Process = () => {
 
           <div className="mt-16 text-center reveal">
             <button className="inline-flex items-center gap-2 text-paris-navy font-medium hover:text-paris-orange transition-colors group">
-              <span>Démarrer votre projet</span>
+              {/* <span>Démarrer votre projet</span> */}
               <ChevronRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
