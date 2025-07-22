@@ -15,73 +15,73 @@ const Gallery = () => {
 
   const images: GalleryImage[] = [
     {
-      src: "/public/nas_pic_2.jpeg",
+      src: "/nas_pic_2.jpeg",
       alt: "Espace professionnel",
       category: "Espace professionnel",
     },
     {
-      src: "/public/nas_pic_1.jpeg",
+      src: "/nas_pic_1.jpeg",
       alt: "Salle de Bain",
       category: "Salle de bain",
     },
     {
-      src: "/public/nas_pic_3.jpeg",
+      src: "/nas_pic_3.jpeg",
       alt: "Agence immobilière",
       category: "Agence immobilière",
     },
 
     {
-      src: "/public/nas_pic_6.jpeg",
+      src: "/nas_pic_6.jpeg",
       alt: "Salle de bain",
       category: "Salle de bain",
     },
     {
-      src: "/public/nas_pic_7.jpeg",
+      src: "/nas_pic_7.jpeg",
       alt: "Meubles sur mesure",
       category: "salon",
     },
     {
-      src: "/public/nas_pic_8.jpeg",
+      src: "/nas_pic_8.jpeg",
       alt: "Cuisine sur mesure",
       category: "Cuisine sur mesure",
     },
     {
-      src: "/public/nas_pic_4.jpeg",
+      src: "/nas_pic_4.jpeg",
       alt: "Agence immobilière",
       category: "Agence immobilière",
     },
     {
-      src: "/public/nas_pic_11.jpeg",
+      src: "/nas_pic_11.jpeg",
       alt: "Salle à manger",
       category: "Salle à manger",
     },
     {
-      src: "/public/nas_pic_12.jpeg",
+      src: "/nas_pic_12.jpeg",
       alt: "Chambre",
       category: "Chambre",
     },
     {
-      src: "/public/nas_pic_13.jpeg",
+      src: "/nas_pic_13.jpeg",
       alt: "Salon",
       category: "Salon",
     },
     {
-      src: "/public/nas_pic_5.jpeg",
+      src: "/nas_pic_5.jpeg",
       alt: "Espace professionnel",
       category: "Espace professionnel",
     },
     {
-      src: "/public/nas_pic_16.jpg",
+      src: "/nas_pic_16.jpg",
       alt: "Salon",
       category: "Salon",
     },
     {
-      src: "/public/nas_pic_9.jpg",
+      src: "/nas_pic_9.jpg",
       alt: "Meubles sur mesure",
       category: "Meubles sur mesure",
     },
     {
-      src: "/public/nas_pic_17.jpeg",
+      src: "/nas_pic_17.jpeg",
       alt: "Chambre",
       category: "Chambre",
     },
