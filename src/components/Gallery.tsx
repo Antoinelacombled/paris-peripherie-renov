@@ -210,6 +210,7 @@ const Gallery = () => {
               src={filteredImages[currentIndex]?.src}
               alt={filteredImages[currentIndex]?.alt}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
             {/* Overlay texte */}
             <div className="absolute inset-0 bg-gradient-to-t from-paris-navy/80 via-paris-navy/20 to-transparent flex items-end pointer-events-none">
