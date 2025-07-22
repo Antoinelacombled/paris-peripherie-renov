@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
 import gsap from "gsap";
+import { useEffect, useRef } from "react";
 
 const Hero = () => {
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -91,8 +90,8 @@ const Hero = () => {
     // Démarrer l'animation après un délai
     setTimeout(() => {
       animateWord();
-      setInterval(animateWord, 2000);
-    }, 2000);
+      setInterval(animateWord, 4000);
+    }, 4000);
   }, []);
 
   return (

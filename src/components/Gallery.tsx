@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 interface GalleryImage {
   src: string;
@@ -11,37 +10,80 @@ interface GalleryImage {
 const Gallery = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
   const images: GalleryImage[] = [
     {
-      src: "/gallery1.jpeg",
-      alt: "Espace commercial",
-      category: "espace commercial",
+      src: "/public/nas_pic_2.jpeg",
+      alt: "Espace professionnel",
+      category: "Espace professionnel",
     },
     {
-      src: "/gallery2.jpeg",
-      alt: "Salle de bain rénovée",
-      category: "salle de bain",
+      src: "/public/nas_pic_1.jpeg",
+      alt: "Salle de Bain",
+      category: "Salle de bain",
     },
     {
-      src: "/gallery3.jpeg",
-      alt: "Salon rénové à neuf",
-      category: "salon",
+      src: "/public/nas_pic_3.jpeg",
+      alt: "Agence immobilière",
+      category: "Agence immobilière",
+    },
+
+    {
+      src: "/public/nas_pic_6.jpeg",
+      alt: "Salle de bain",
+      category: "Salle de bain",
     },
     {
-      src: "/gallery4.jpeg",
-      alt: "Cuisine rénovée",
-      category: "cuisine",
-    },
-    {
-      src: "/gallery5.jpg",
-      alt: "Planché chauffant",
-      category: "cuisine",
-    },
-    {
-      src: "/gallery6.jpg",
+      src: "/public/nas_pic_7.jpeg",
       alt: "Meubles sur mesure",
       category: "salon",
+    },
+    {
+      src: "/public/nas_pic_8.jpeg",
+      alt: "Cuisine sur mesure",
+      category: "Cuisine sur mesure",
+    },
+    {
+      src: "/public/nas_pic_4.jpeg",
+      alt: "Agence immobilière",
+      category: "Agence immobilière",
+    },
+    {
+      src: "/public/nas_pic_11.jpeg",
+      alt: "Salle à manger",
+      category: "Salle à manger",
+    },
+    {
+      src: "/public/nas_pic_12.jpeg",
+      alt: "Chambre",
+      category: "Chambre",
+    },
+    {
+      src: "/public/nas_pic_13.jpeg",
+      alt: "Salon",
+      category: "Salon",
+    },
+    {
+      src: "/public/nas_pic_5.jpeg",
+      alt: "Espace professionnel",
+      category: "Espace professionnel",
+    },
+    {
+      src: "/public/nas_pic_16.jpg",
+      alt: "Salon",
+      category: "Salon",
+    },
+    {
+      src: "/public/nas_pic_9.jpg",
+      alt: "Meubles sur mesure",
+      category: "Meubles sur mesure",
+    },
+    {
+      src: "/public/nas_pic_17.jpeg",
+      alt: "Chambre",
+      category: "Chambre",
     },
   ];
 
@@ -62,6 +104,33 @@ const Gallery = () => {
   //   "salle-de-bain": "Salles de bain",
   //   chambre: "Chambres",
   // };
+
+  // Animation de fondu lors du changement d'image
+  const goToImage = (idx: number) => {
+    setFade(false);
+    setTimeout(() => {
+      setCurrentIndex(idx);
+      setFade(true);
+    }, 200);
+  };
+
+  const handlePrev = () => {
+    goToImage(
+      (currentIndex - 1 + filteredImages.length) % filteredImages.length
+    );
+  };
+
+  const handleNext = () => {
+    goToImage((currentIndex + 1) % filteredImages.length);
+  };
+
+  // (Optionnel) Autoplay
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [currentIndex, filteredImages.length]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,38 +198,65 @@ const Gallery = () => {
           ))}
         </div> */}
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredImages.map((image, index) => (
-            <div
-              key={index}
-              className="reveal overflow-hidden rounded-sm shadow-lg group relative aspect-[4/3] hover:shadow-xl transition-all duration-300"
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-paris-navy/80 via-paris-navy/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end">
-                <div className="p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <p className="text-white font-medium text-lg mb-2">
-                    {image.alt}
-                  </p>
-                  <div className="flex items-center text-white/80 text-sm">
-                    <span>Voir le projet</span>
-                    <ChevronRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
-                </div>
+        {/* Carrousel */}
+        <div className="relative max-w-2xl mx-auto">
+          <div
+            className={`relative aspect-[4/3] rounded-sm shadow-lg overflow-hidden transition-opacity duration-500 ${
+              fade ? "opacity-100" : "opacity-0"
+            }`}
+            key={filteredImages[currentIndex]?.src}
+          >
+            <img
+              src={filteredImages[currentIndex]?.src}
+              alt={filteredImages[currentIndex]?.alt}
+              className="w-full h-full object-cover"
+            />
+            {/* Overlay texte */}
+            <div className="absolute inset-0 bg-gradient-to-t from-paris-navy/80 via-paris-navy/20 to-transparent flex items-end pointer-events-none">
+              <div className="p-6 w-full">
+                <p className="text-white font-medium text-lg mb-2">
+                  {filteredImages[currentIndex]?.alt}
+                </p>
+                {/* <div className="flex items-center text-white/80 text-sm">
+                  <span>Voir le projet</span>
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </div> */}
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-16 text-center reveal">
-          <button className="inline-flex items-center gap-2 text-paris-navy font-medium hover:text-paris-orange transition-colors group">
-            {/* <span>Voir tous nos projets</span> */}
-            <ChevronRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
+            {/* Boutons navigation */}
+            <button
+              aria-label="Image précédente"
+              onClick={handlePrev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-paris-orange/80 text-paris-navy hover:text-white rounded-full p-2 shadow transition-colors"
+              style={{ pointerEvents: "auto" }}
+            >
+              <ChevronLeft className="w-7 h-7" />
+            </button>
+            <button
+              aria-label="Image suivante"
+              onClick={handleNext}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-paris-orange/80 text-paris-navy hover:text-white rounded-full p-2 shadow transition-colors"
+              style={{ pointerEvents: "auto" }}
+            >
+              <ChevronRight className="w-7 h-7" />
+            </button>
+            {/* Points de navigation */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              {filteredImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    idx === currentIndex
+                      ? "bg-paris-orange scale-125"
+                      : "bg-paris-navy/40"
+                  }`}
+                  onClick={() => goToImage(idx)}
+                  aria-label={`Aller à l'image ${idx + 1}`}
+                  style={{ pointerEvents: "auto" }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

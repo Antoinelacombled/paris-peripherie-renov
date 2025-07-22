@@ -1,5 +1,4 @@
-import React from "react";
-import { MapPin, Phone, Mail, ChevronRight } from "lucide-react";
+import { ChevronRight, Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -14,7 +13,8 @@ const Footer = () => {
               </h3>
               <p className="text-paris-grey/90 leading-relaxed">
                 Experts en rénovation de qualité pour des espaces durables et
-                élégants à Paris et sa périphérie.
+                élégants à Paris, sa périphérie, mais aussi dans le reste de la
+                France et en Suisse.
               </p>
             </div>
             <div className="flex items-center gap-3 group">
@@ -38,10 +38,11 @@ const Footer = () => {
                   <Phone className="text-paris-orange w-5 h-5" />
                 </div>
                 <a
-                  href="tel:+33123456789"
+                  href="tel:+33605708376"
                   className="text-paris-grey/90 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
                 >
-                  06 05 70 83 76
+                  06 05 70 83 76 <br />
+                  06 66 34 66 39
                   <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
                 </a>
               </div>
@@ -53,7 +54,7 @@ const Footer = () => {
                   href="mailto:contact@parisperipherie-renovation.fr"
                   className="text-paris-grey/90 hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
                 >
-                  contact@parisperipherie-renovation.fr
+                  pprenov75@gmail.com
                   <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
                 </a>
               </div>
@@ -113,47 +114,58 @@ const Footer = () => {
             <ul className="space-y-4 text-paris-grey/90">
               <li>
                 <a
-                  href="#"
-                  className="hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <span>Paris (75)</span>
-                  <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <span>Hauts-de-Seine (92)</span>
-                  <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <span>Seine-Saint-Denis (93)</span>
-                  <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <span>Val-de-Marne (94)</span>
-                  <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
-                  className="hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group"
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
                 >
                   <span>Val-d'Oise (95)</span>
-                  <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+              </li>
+              <li>
+                <a
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <span>France entière </span>
+                </a>
+              </li>
+              <li>
+                <a
+                  // href="#"
+                  className="hover:text-white cursor-default transition-colors duration-300 inline-flex items-center gap-2 group"
+                >
+                  <span>Suisse</span>
                 </a>
               </li>
             </ul>

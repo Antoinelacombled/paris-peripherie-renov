@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
-import { Phone, Mail, Clock, ChevronRight } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { ChevronRight, Clock, Mail, Phone } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 import { EMAILJS_CONFIG } from "../config/emailjs";
 
 const ContactCTA = () => {
@@ -139,10 +139,11 @@ const ContactCTA = () => {
                   <div>
                     <p className="font-medium text-lg mb-1">Téléphone</p>
                     <a
-                      href="tel:+33123456789"
+                      href="tel:+33605708376"
                       className="text-paris-grey hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
                     >
-                      06 05 70 83 76
+                      06 05 70 83 76 <br />
+                      06 66 34 66 39
                       <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
                     </a>
                   </div>
@@ -158,7 +159,7 @@ const ContactCTA = () => {
                       href="mailto:contact@parisperipherie-renovation.fr"
                       className="text-paris-grey hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
                     >
-                      contact@parisperipherie-renovation.fr
+                      pprenov75@gmail.com
                       <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
                     </a>
                   </div>

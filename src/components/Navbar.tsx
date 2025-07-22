@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { Phone } from "lucide-react";
 import gsap from "gsap";
+import { Phone } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -113,14 +113,17 @@ const Navbar = () => {
           </ul>
           <a
             ref={phoneRef}
-            href="tel:+33123456789"
+            href="tel:+33605708376"
             className={cn(
               "flex items-center gap-2 smooth-transition font-medium",
               isScrolled ? "text-paris-accent" : "text-white"
             )}
           >
             <Phone size={18} />
-            <span> 06 05 70 83 76</span>
+            <span>
+              {" "}
+              06 05 70 83 76 <br /> 06 66 34 66 39
+            </span>
           </a>
         </div>
 
@@ -213,7 +216,9 @@ const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Phone size={18} />
-                <span>06 05 70 83 76</span>
+                <span>
+                  06 05 70 83 76 <br /> 06 66 34 66 39
+                </span>
               </a>
             </li>
           </ul>
