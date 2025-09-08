@@ -123,41 +123,41 @@ const Process = () => {
               <div
                 key={index}
                 ref={(el) => (stepsRef.current[index] = el)}
-                className={`relative flex flex-col md:flex-row md:items-center reveal mb-16 md:mb-24 p-6 rounded-lg transition-all duration-300 ${
+                className={`relative flex flex-col md:flex-row md:items-center reveal mb-12 md:mb-16 p-4 rounded-lg transition-all duration-300 ${
                   index % 2 === 0 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                {/* Step Number */}
-                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-14 h-14 rounded-full bg-paris-navy text-white items-center justify-center font-bold text-xl z-10 shadow-lg shadow-paris-navy/20 group-hover:scale-110 transition-transform duration-300 step-number">
-                  {index + 1}
+                {/* Icon Only */}
+                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-paris-navy to-paris-navy/80 text-white items-center justify-center z-10 shadow-lg shadow-paris-navy/20 group-hover:scale-110 transition-transform duration-300 step-number">
+                  <step.icon className="w-8 h-8" />
                 </div>
 
                 {/* Content */}
                 <div
                   className={`md:w-5/12 ${
-                    index % 2 === 0 ? "md:pl-16" : "md:pr-16 md:text-right"
+                    index % 2 === 0 ? "md:pl-20" : "md:pr-20 md:text-right"
                   }`}
                 >
-                  <div className="flex items-center gap-4 mb-4 md:hidden">
-                    <div className="w-12 h-12 rounded-full bg-paris-navy text-white flex items-center justify-center font-bold shadow-lg step-number">
-                      {index + 1}
+                  <div className="flex items-center gap-4 mb-3 md:hidden">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-paris-navy to-paris-navy/80 text-white flex items-center justify-center shadow-lg step-number">
+                      <step.icon className="w-6 h-6" />
                     </div>
-                    <h3 className="font-serif text-2xl text-paris-navy step-title">
+                    <h3 className="font-serif text-xl text-paris-navy step-title">
                       {step.title}
                     </h3>
                   </div>
-                  <h3 className="hidden md:block font-serif text-2xl text-paris-navy mb-4 group-hover:text-paris-orange transition-colors duration-300 step-title">
+                  <h3 className="hidden md:block font-serif text-xl text-paris-navy mb-3 group-hover:text-paris-orange transition-colors duration-300 step-title">
                     {step.title}
                   </h3>
-                  <p className="text-paris-grey leading-relaxed">
+                  <p className="text-paris-grey leading-relaxed text-sm">
                     {step.description}
                   </p>
                 </div>
 
-                {/* Icon */}
-                <div className="md:w-2/12 flex justify-center items-center py-6 md:py-0">
-                  <div className="w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center text-paris-navy group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 step-icon">
-                    <step.icon className="w-10 h-10" />
+                {/* Icon - Hidden on desktop since it's in the number circle */}
+                <div className="md:hidden flex justify-center items-center py-4">
+                  <div className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-paris-navy group-hover:shadow-xl group-hover:scale-105 transition-all duration-300 step-icon">
+                    <step.icon className="w-8 h-8" />
                   </div>
                 </div>
 
@@ -167,11 +167,24 @@ const Process = () => {
             ))}
           </div>
 
-          <div className="mt-16 text-center reveal">
-            <button className="inline-flex items-center gap-2 text-paris-navy font-medium hover:text-paris-orange transition-colors group">
-              {/* <span>Démarrer votre projet</span> */}
-              <ChevronRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
+          {/* Call to Action */}
+          <div className="mt-20 text-center reveal">
+            <div className="bg-gradient-to-r from-paris-navy to-paris-navy/90 rounded-2xl p-8 text-white">
+              <h3 className="font-serif text-2xl mb-4">
+                Prêt à démarrer votre projet ?
+              </h3>
+              <p className="text-paris-grey/90 mb-6 max-w-2xl mx-auto">
+                Contactez-nous dès aujourd'hui pour une consultation gratuite et
+                sans engagement.
+              </p>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 bg-paris-orange hover:bg-paris-orange/90 text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+              >
+                <span>Démarrer mon projet</span>
+                <ChevronRight className="w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -163,7 +163,7 @@
 
 /* Premium Text Highlight */
 .premium-highlight {
-  background: linear-gradient(135deg, #fec6a1 0%, #f97316 100%);
+  background: linear-gradient(135deg, #fec6a1 0%, #e6a85c 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -182,7 +182,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    #f97316 50%,
+    #e6a85c 50%,
     transparent 100%
   );
   opacity: 0;

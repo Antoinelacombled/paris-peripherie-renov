@@ -7,7 +7,6 @@ const Hero = () => {
   const sloganRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
-  const rotatingWordRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -53,73 +52,6 @@ const Hero = () => {
       { y: 0, opacity: 1, duration: 0.6, stagger: 0.2, ease: "power2.out" },
       "-=0.4"
     );
-
-    // Animation premium du mot rotatif
-    const words = [
-      "maison",
-      "appartement",
-      "villa",
-      "commerce",
-      "extérieur",
-      "bureau",
-    ];
-    let currentIndex = 0;
-
-    const animateWord = () => {
-      if (!rotatingWordRef.current) return;
-
-      // Animation de sortie plus sophistiquée
-      gsap
-        .timeline()
-        .to(rotatingWordRef.current, {
-          opacity: 0,
-          y: -30,
-          rotationX: -90,
-          scale: 0.8,
-          duration: 0.4,
-          ease: "power3.in",
-        })
-        .call(() => {
-          // Changer le mot pendant l'animation
-          if (rotatingWordRef.current) {
-            rotatingWordRef.current.textContent = words[currentIndex];
-            currentIndex = (currentIndex + 1) % words.length;
-          }
-        })
-        .fromTo(
-          rotatingWordRef.current,
-          {
-            opacity: 0,
-            y: 30,
-            rotationX: 90,
-            scale: 0.8,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            rotationX: 0,
-            scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          }
-        )
-        .to(rotatingWordRef.current, {
-          scale: 1.05,
-          duration: 0.1,
-          ease: "power2.out",
-        })
-        .to(rotatingWordRef.current, {
-          scale: 1,
-          duration: 0.1,
-          ease: "power2.out",
-        });
-    };
-
-    // Démarrer l'animation après un délai
-    setTimeout(() => {
-      animateWord();
-      setInterval(animateWord, 3000); // Augmenté à 3s pour plus d'élégance
-    }, 2000);
   }, []);
 
   return (
@@ -152,28 +84,21 @@ const Hero = () => {
           {/* Content */}
           <div ref={contentRef}>
             <h1 className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl mb-6 drop-shadow-lg">
-              Besoin de rénover <br />
-              votre{" "}
-              <span
-                ref={rotatingWordRef}
-                className="inline-block text-paris-orange drop-shadow-md font-bold relative"
-                style={{
-                  transformStyle: "preserve-3d",
-                  backfaceVisibility: "hidden",
-                }}
-              >
-                maison
-              </span>{" "}
-              ?
+              Des espaces qui <br />
+              vous{" "}
+              <span className="inline-block text-paris-orange drop-shadow-md font-bold">
+                ressemblent
+              </span>
             </h1>
 
             <p className="text-lg md:text-xl mb-8 max-w-2xl drop-shadow-md">
               Transformez votre bien immobilier avec l'
-              <span className="premium-highlight">excellence</span> artisanale
-              d'une entreprise qui valorise la
-              <span className="premium-highlight">précision</span>, la
-              <span className="premium-highlight">qualité</span> et l'
-              <span className="premium-highlight">engagement</span>.
+              <strong>excellence</strong> artisanale
+              <br />
+              d'une entreprise qui valorise la <strong>précision</strong>, la{" "}
+              <strong>qualité</strong>
+              <br />
+              et l'<strong>engagement</strong>.
             </p>
 
             <div ref={buttonsRef} className="flex flex-wrap gap-4">
