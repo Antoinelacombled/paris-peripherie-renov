@@ -160,3 +160,35 @@
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+
+/* Premium Text Highlight */
+.premium-highlight {
+  background: linear-gradient(135deg, #fec6a1 0%, #f97316 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.premium-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #f97316 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.premium-highlight:hover::after {
+  opacity: 1;
+}
