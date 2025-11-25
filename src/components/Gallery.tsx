@@ -1,136 +1,48 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { ChevronDown } from "lucide-react";
 
 interface GalleryImage {
   src: string;
   alt: string;
   category: string;
+  span?: string; // For masonry layout control
 }
 
 const Gallery = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState("all");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const images: GalleryImage[] = [
-    {
-      src: "/nas_pic_2.jpeg",
-      alt: "Espace professionnel",
-      category: "Espace professionnel",
-    },
-    {
-      src: "/nas_pic_1.jpeg",
-      alt: "Salle de Bain",
-      category: "Salle de bain",
-    },
-    {
-      src: "/nas_pic_3.jpeg",
-      alt: "Agence immobilière",
-      category: "Agence immobilière",
-    },
-
-    {
-      src: "/nas_pic_6.jpeg",
-      alt: "Salle de bain",
-      category: "Salle de bain",
-    },
-    {
-      src: "/nas_pic_7.jpeg",
-      alt: "Meubles sur mesure",
-      category: "salon",
-    },
-    {
-      src: "/nas_pic_8.jpeg",
-      alt: "Cuisine sur mesure",
-      category: "Cuisine sur mesure",
-    },
-    {
-      src: "/nas_pic_4.jpeg",
-      alt: "Agence immobilière",
-      category: "Agence immobilière",
-    },
-    {
-      src: "/nas_pic_11.jpeg",
-      alt: "Salle à manger",
-      category: "Salle à manger",
-    },
-    {
-      src: "/nas_pic_12.jpeg",
-      alt: "Chambre",
-      category: "Chambre",
-    },
-    {
-      src: "/nas_pic_13.jpeg",
-      alt: "Salon",
-      category: "Salon",
-    },
-    {
-      src: "/nas_pic_5.jpeg",
-      alt: "Espace professionnel",
-      category: "Espace professionnel",
-    },
-    {
-      src: "/nas_pic_16.jpg",
-      alt: "Salon",
-      category: "Salon",
-    },
-    {
-      src: "/nas_pic_9.jpg",
-      alt: "Meubles sur mesure",
-      category: "Meubles sur mesure",
-    },
-    {
-      src: "/nas_pic_17.jpeg",
-      alt: "Chambre",
-      category: "Chambre",
-    },
+    { src: "/nas_pic_2.jpeg", alt: "Espace professionnel", category: "Espace professionnel", span: "row-span-2" },
+    { src: "/nas_pic_1.jpeg", alt: "Salle de Bain", category: "Salle de bain" },
+    { src: "/nas_pic_3.jpeg", alt: "Agence immobilière", category: "Agence immobilière" },
+    { src: "/nas_pic_6.jpeg", alt: "Salle de bain", category: "Salle de bain", span: "col-span-2" },
+    { src: "/nas_pic_7.jpeg", alt: "Meubles sur mesure", category: "salon" },
+    { src: "/nas_pic_8.jpeg", alt: "Cuisine sur mesure", category: "Cuisine sur mesure", span: "row-span-2" },
+    { src: "/nas_pic_4.jpeg", alt: "Agence immobilière", category: "Agence immobilière" },
+    { src: "/nas_pic_11.jpeg", alt: "Salle à manger", category: "Salle à manger" },
+    { src: "/nas_pic_12.jpeg", alt: "Chambre", category: "Chambre", span: "col-span-2" },
+    { src: "/nas_pic_13.jpeg", alt: "Salon", category: "Salon" },
+    { src: "/nas_pic_5.jpeg", alt: "Espace professionnel", category: "Espace professionnel" },
+    { src: "/nas_pic_16.jpg", alt: "Salon", category: "Salon", span: "row-span-2" },
+    { src: "/nas_pic_9.jpg", alt: "Meubles sur mesure", category: "Meubles sur mesure" },
+    { src: "/nas_pic_17.jpeg", alt: "Chambre", category: "Chambre" },
   ];
 
-  const filteredImages =
-    activeCategory === "all"
-      ? images
-      : images.filter((img) => img.category === activeCategory);
+  const filteredImages = activeCategory === "all"
+    ? images
+    : images.filter(img => img.category === activeCategory);
 
-  const categories = [
-    "all",
-    ...Array.from(new Set(images.map((img) => img.category))),
-  ];
+  const visibleImages = filteredImages.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredImages.length;
 
-  // const categoryLabels: Record<string, string> = {
-  //   all: "Tous",
-  //   salon: "Salons",
-  //   cuisine: "Cuisines",
-  //   "salle-de-bain": "Salles de bain",
-  //   chambre: "Chambres",
-  // };
+  const categories = ["all", ...Array.from(new Set(images.map(img => img.category)))];
 
-  // Animation de fondu lors du changement d'image
-  const goToImage = (idx: number) => {
-    setFade(false);
-    setTimeout(() => {
-      setCurrentIndex(idx);
-      setFade(true);
-    }, 200);
-  };
-
-  const handlePrev = () => {
-    goToImage(
-      (currentIndex - 1 + filteredImages.length) % filteredImages.length
-    );
-  };
-
-  const handleNext = () => {
-    goToImage((currentIndex + 1) % filteredImages.length);
-  };
-
-  // (Optionnel) Autoplay
   useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [currentIndex, filteredImages.length]);
+    setVisibleCount(6);
+  }, [activeCategory]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -140,7 +52,7 @@ const Gallery = () => {
             sectionRef.current.querySelectorAll(".reveal").forEach((el, i) => {
               setTimeout(() => {
                 el.classList.add("active");
-              }, i * 150);
+              }, i * 100);
             });
           }
           observer.disconnect();
@@ -156,109 +68,67 @@ const Gallery = () => {
     return () => {
       observer.disconnect();
     };
-  }, [activeCategory]);
+  }, [visibleImages]); // Re-run observer when visible images change
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 6);
+  };
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="section-padding bg-white"
-    >
+    <section id="projects" ref={sectionRef} className="section-padding bg-white">
       <div className="container mx-auto container-padding">
-        <div className="text-center max-w-4xl mx-auto mb-20 reveal">
-          <h2 className="section-title relative inline-block">
-            Nos réalisations
-            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-paris-orange"></span>
+        <div className="text-center max-w-4xl mx-auto mb-16 reveal">
+          <h2 className="section-title">
+            Nos <span className="premium-highlight">Réalisations</span>
           </h2>
-          <p className="text-paris-grey text-lg mt-3 leading-relaxed">
-            Explorez notre portfolio de rénovations pour vous inspirer de la{" "}
-            <span className="font-medium text-paris-navy relative">
-              qualité de notre travail
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-paris-orange/30"></span>
-            </span>{" "}
-            et des possibilités pour votre projet.
+          <p className="text-paris-grey text-lg leading-relaxed font-light">
+            Une collection d'espaces transformés, où chaque détail raconte une histoire de
+            <span className="text-paris-navy font-medium"> passion</span> et d'
+            <span className="text-paris-navy font-medium"> exigence</span>.
           </p>
         </div>
 
-        {/* Category Filter */}
-        {/* <div className="flex flex-wrap justify-center mb-16 gap-3 md:gap-4 reveal">
-          {categories.map((category) => (
-            <button
-              key={category}
+        {/* Masonry Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[250px]">
+          {visibleImages.map((img, idx) => (
+            <div
+              key={`${img.src}-${idx}`}
               className={cn(
-                "px-6 py-3 rounded-sm font-medium transition-all duration-300 text-sm uppercase tracking-wider",
-                activeCategory === category
-                  ? "bg-paris-navy text-white shadow-lg shadow-paris-navy/20"
-                  : "bg-paris-light text-paris-navy hover:bg-paris-navy/10 hover:shadow-md"
+                "reveal group relative rounded-xl overflow-hidden cursor-pointer",
+                img.span || ""
               )}
-              onClick={() => setActiveCategory(category)}
+              style={{ transitionDelay: `${(idx % 6) * 50}ms` }}
             >
-              {categoryLabels[category] || category}
-            </button>
-          ))}
-        </div> */}
-
-        {/* Carrousel */}
-        <div className="relative max-w-2xl mx-auto">
-          <div
-            className={`relative aspect-[4/3] rounded-sm shadow-lg overflow-hidden transition-opacity duration-500 ${
-              fade ? "opacity-100" : "opacity-0"
-            }`}
-            key={filteredImages[currentIndex]?.src}
-          >
-            <img
-              src={filteredImages[currentIndex]?.src}
-              alt={filteredImages[currentIndex]?.alt}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-            {/* Overlay texte */}
-            <div className="absolute inset-0 bg-gradient-to-t from-paris-navy/80 via-paris-navy/20 to-transparent flex items-end pointer-events-none">
-              <div className="p-6 w-full">
-                <p className="text-white font-medium text-lg mb-2">
-                  {filteredImages[currentIndex]?.alt}
-                </p>
-                {/* <div className="flex items-center text-white/80 text-sm">
-                  <span>Voir le projet</span>
-                  <ChevronRight className="w-4 h-4 ml-1" />
-                </div> */}
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-paris-navy/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <span className="text-paris-orange text-xs uppercase tracking-wider font-medium mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                  {img.category}
+                </span>
+                <h3 className="text-white text-xl font-serif transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">
+                  {img.alt}
+                </h3>
               </div>
             </div>
-            {/* Boutons navigation */}
-            <button
-              aria-label="Image précédente"
-              onClick={handlePrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-paris-orange/80 text-paris-navy hover:text-white rounded-full p-2 shadow transition-colors"
-              style={{ pointerEvents: "auto" }}
-            >
-              <ChevronLeft className="w-7 h-7" />
-            </button>
-            <button
-              aria-label="Image suivante"
-              onClick={handleNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-paris-orange/80 text-paris-navy hover:text-white rounded-full p-2 shadow transition-colors"
-              style={{ pointerEvents: "auto" }}
-            >
-              <ChevronRight className="w-7 h-7" />
-            </button>
-            {/* Points de navigation */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-              {filteredImages.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    idx === currentIndex
-                      ? "bg-paris-orange scale-125"
-                      : "bg-paris-navy/40"
-                  }`}
-                  onClick={() => goToImage(idx)}
-                  aria-label={`Aller à l'image ${idx + 1}`}
-                  style={{ pointerEvents: "auto" }}
-                />
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
+
+        {/* Load More Button */}
+        {hasMore && (
+          <div className="mt-16 text-center reveal">
+            <button
+              onClick={handleLoadMore}
+              className="group inline-flex items-center gap-2 px-8 py-3 bg-white border border-paris-navy/20 text-paris-navy rounded-full hover:bg-paris-navy hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
+            >
+              <span className="font-medium tracking-wide text-sm uppercase">Voir plus de réalisations</span>
+              <ChevronDown className="w-4 h-4 transform group-hover:translate-y-1 transition-transform duration-300" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

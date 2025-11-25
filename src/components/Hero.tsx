@@ -1,10 +1,10 @@
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const sloganRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
 
@@ -17,50 +17,42 @@ const Hero = () => {
       tl.fromTo(
         videoRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1.5, ease: "power2.inOut" }
+        { opacity: 1, duration: 2, ease: "power2.inOut" }
       );
     }
-
-    // Animation du slogan
-    tl.fromTo(
-      sloganRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-      "-=0.5"
-    );
 
     // Animation du titre
     tl.fromTo(
       contentRef.current?.querySelector("h1"),
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-      "-=0.5"
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" },
+      "-=1"
     );
 
     // Animation de la description
     tl.fromTo(
       contentRef.current?.querySelector("p"),
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-      "-=0.5"
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+      "-=0.8"
     );
 
     // Animation des boutons
     tl.fromTo(
       buttonsRef.current?.children,
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, stagger: 0.2, ease: "power2.out" },
-      "-=0.4"
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: "power3.out" },
+      "-=0.6"
     );
   }, []);
 
   return (
-    <section className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen min-h-[800px] w-full flex items-center justify-center overflow-hidden">
       {/* Background Video */}
       <div ref={backgroundRef} className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover scale-105"
           autoPlay
           muted
           loop
@@ -68,46 +60,40 @@ const Hero = () => {
         >
           <source src="/video_nass.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-paris-navy bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-paris-navy/60 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-paris-navy via-transparent to-paris-navy/30"></div>
       </div>
 
-      <div className="container relative z-10 mx-auto container-padding text-white">
-        <div className="max-w-3xl">
-          {/* Slogan */}
-          {/* <div ref={sloganRef} className="mb-8">
-            <p className="font-cursive text-2xl sm:text-3xl md:text-4xl text-paris-orange italic mb-2">
-              "Une chose vaut la peine d'être faite, que si elle est bien
-              faite."
-            </p>
-          </div> */}
-
+      <div className="container relative z-10 mx-auto px-6 md:px-12 text-white">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Content */}
-          <div ref={contentRef}>
-            <h1 className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl mb-6 drop-shadow-lg">
-              Des espaces qui <br />
-              vous{" "}
-              <span className="inline-block text-paris-orange drop-shadow-md font-bold">
-                ressemblent
-              </span>
+          <div ref={contentRef} className="space-y-8">
+            <h1 className="font-sans font-light text-5xl md:text-7xl lg:text-8xl tracking-tight leading-tight">
+              L'art de la <br />
+              <span className="font-serif italic text-paris-orange">rénovation</span>
             </h1>
 
-            <p className="text-lg md:text-xl mb-8 max-w-2xl drop-shadow-md">
-              Transformez votre bien immobilier avec l'
-              <strong>excellence</strong> artisanale
-              <br />
-              d'une entreprise qui valorise la <strong>précision</strong>, la{" "}
-              <strong>qualité</strong>
-              <br />
-              et l'<strong>engagement</strong>.
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light leading-relaxed">
+              Transformez votre espace de vie ou votre espace professionnel avec une précision artisanale et une élégance intemporelle.
+
             </p>
 
-            <div ref={buttonsRef} className="flex flex-wrap gap-4">
-              <a href="#contact" className="btn-primary">
-                Consultation gratuite
+            <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
+              <a href="#contact" className="group relative px-8 py-4 bg-white text-paris-navy rounded-full font-medium tracking-wide overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2">
+                  Consultation Gratuite
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                </span>
+                <div className="absolute inset-0 bg-paris-orange transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></div>
+                <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Consultation Gratuite
+                  <ArrowRight size={18} className="translate-x-1" />
+                </span>
               </a>
+
               <a
                 href="#projects"
-                className="btn-secondary border-white text-white hover:bg-white hover:text-paris-navy"
+                className="px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 font-medium tracking-wide"
               >
                 Voir nos réalisations
               </a>
@@ -117,10 +103,9 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-8 h-12 rounded-full border-2 border-white flex items-start justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-[bounce_1.5s_infinite]"></div>
-        </div>
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+        <span className="text-xs uppercase tracking-[0.2em] font-light">Découvrir</span>
+        <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent"></div>
       </div>
     </section>
   );

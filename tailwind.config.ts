@@ -63,11 +63,13 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         paris: {
-          navy: "#1A1F2C",
-          grey: "#8E9196",
-          orange: "#FEC6A1",
-          accent: "#E6A85C",
-          light: "#F6F6F7",
+          navy: "#0F172A", // Deep rich navy
+          grey: "#94A3B8", // Cool grey
+          orange: "#D4AF37", // Metallic Gold
+          accent: "#C5A059", // Muted Gold
+          light: "#F8FAFC", // Ice white
+          "glass-dark": "rgba(15, 23, 42, 0.8)",
+          "glass-light": "rgba(255, 255, 255, 0.8)",
         },
       },
       borderRadius: {
@@ -108,6 +110,10 @@ export default {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -116,9 +122,10 @@ export default {
         "fade-in-right": "fade-in-right 0.7s ease-out",
         "fade-in-left": "fade-in-left 0.7s ease-out",
         "scale-in": "scale-in 0.7s ease-out",
+        "shimmer": "shimmer 3s linear infinite",
       },
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
         serif: ["Playfair Display", "serif"],
         cursive: ["Petit Formal Script", "cursive"],
       },

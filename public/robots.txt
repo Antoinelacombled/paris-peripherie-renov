@@ -1,14 +1,9 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# robots.txt for parisperipherie-renovation.fr
 
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/
+
+Sitemap: https://parisperipherie-renovation.fr/sitemap.xml
