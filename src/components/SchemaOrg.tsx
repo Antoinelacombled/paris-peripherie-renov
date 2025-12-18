@@ -1,5 +1,5 @@
 interface SchemaOrgProps {
-    type: 'LocalBusiness' | 'FAQPage' | 'Organization';
+    type: 'LocalBusiness' | 'FAQPage' | 'Organization' | 'Article';
     data?: any;
 }
 
@@ -60,8 +60,24 @@ const SchemaOrg = ({ type, data }: SchemaOrgProps) => {
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "name": "Paris Périphérie Rénovation",
-                "url": "https://parisperipherie-renovation.fr",
-                "logo": "/logo.png",
+                "url": "https://paris-peripherie-renovation.fr",
+                "logo": "https://paris-peripherie-renovation.fr/logo.png",
+                ...data
+            };
+            break;
+
+        case 'Article':
+            schemaData = {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Paris Périphérie Rénovation",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://paris-peripherie-renovation.fr/logo.png"
+                    }
+                },
                 ...data
             };
             break;

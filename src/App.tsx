@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { HelmetProvider } from 'react-helmet-async';
-// import SmoothScroll from "./components/SmoothScroll";
+import SmoothScroll from "./components/SmoothScroll";
 
 // Lazy load pages
 const Index = lazy(() => import("./pages/Index"));
@@ -32,21 +32,23 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/renovation-saint-mande" element={<SaintMande />} />
-              <Route path="/renovation-vincennes" element={<Vincennes />} />
-              <Route path="/renovation-paris" element={<Paris />} />
-              <Route path="/renovation-hauts-de-seine" element={<HautsDeSeine />} />
-              <Route path="/renovation-suisse" element={<Suisse />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
+        <SmoothScroll>
+          <BrowserRouter>
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/renovation-saint-mande" element={<SaintMande />} />
+                <Route path="/renovation-vincennes" element={<Vincennes />} />
+                <Route path="/renovation-paris" element={<Paris />} />
+                <Route path="/renovation-hauts-de-seine" element={<HautsDeSeine />} />
+                <Route path="/renovation-suisse" element={<Suisse />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </SmoothScroll>
       </TooltipProvider>
     </HelmetProvider>
   </QueryClientProvider>

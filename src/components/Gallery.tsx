@@ -84,7 +84,7 @@ const Gallery = () => {
           <p className="text-paris-grey text-lg leading-relaxed font-light">
             Une collection d'espaces transformés, où chaque détail raconte une histoire de
             <span className="text-paris-navy font-medium"> passion</span> et d'
-            <span className="text-paris-navy font-medium"> exigence</span>.
+            <span className="text-paris-navy font-medium">exigence</span>.
           </p>
         </div>
 

@@ -81,12 +81,12 @@ const Hero = () => {
             <div ref={buttonsRef} className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
               <a href="#contact" className="group relative px-8 py-4 bg-white text-paris-navy rounded-full font-medium tracking-wide overflow-hidden">
                 <span className="relative z-10 flex items-center gap-2">
-                  Consultation Gratuite
+                  Devis gratuit
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </span>
                 <div className="absolute inset-0 bg-paris-orange transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></div>
                 <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Consultation Gratuite
+                  Devis gratuit
                   <ArrowRight size={18} className="translate-x-1" />
                 </span>
               </a>

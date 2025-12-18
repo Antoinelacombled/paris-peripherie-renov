@@ -3,7 +3,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /_next/
 Disallow: /api/
 
-Sitemap: https://parisperipherie-renovation.fr/sitemap.xml
+Sitemap: https://paris-peripherie-renovation.fr/sitemap.xml

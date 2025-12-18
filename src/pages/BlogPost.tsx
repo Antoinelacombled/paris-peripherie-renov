@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Calendar, User, Clock, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
 import SEO from "@/components/SEO";
+import SchemaOrg from "@/components/SchemaOrg";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blogPosts";
@@ -41,30 +42,24 @@ const BlogPost = () => {
             />
 
             {/* Schema.org Article Data */}
-            <script type="application/ld+json">
-                {JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "Article",
+            {/* Schema.org Article Data */}
+            <SchemaOrg
+                type="Article"
+                data={{
                     "headline": post.title,
-                    "image": [post.image],
-                    "datePublished": "2024-10-15T08:00:00+08:00", // Placeholder, should be dynamic based on post.date
+                    "image": [
+                        post.image.startsWith('http') ? post.image : `https://parisperipherie-renovation.fr${post.image}`
+                    ],
+                    "datePublished": "2024-10-15T08:00:00+08:00", // Placeholder
                     "dateModified": "2024-10-15T09:20:00+08:00", // Placeholder
                     "author": [{
                         "@type": "Person",
                         "name": post.author,
                         "url": "https://parisperipherie-renovation.fr"
                     }],
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": "Paris Périphérie Rénovation",
-                        "logo": {
-                            "@type": "ImageObject",
-                            "url": "https://parisperipherie-renovation.fr/logo.png"
-                        }
-                    },
                     "description": post.excerpt
-                })}
-            </script>
+                }}
+            />
 
             {/* Reading Progress Bar */}
             <div

@@ -12,10 +12,12 @@ const SEO = ({
     title = "Paris Périphérie Rénovation | Rénovation de Prestige à Paris",
     description = "Expert en rénovation haut de gamme à Paris et Île-de-France. Transformez votre espace avec notre savoir-faire artisanal et notre engagement pour l'excellence. Devis gratuit.",
     keywords = "rénovation paris, artisan rénovation, rénovation appartement paris, rénovation maison ile de france, renovation cuisine paris, renovation salle de bain",
-    ogImage = "/og-image.jpg",
+    ogImage = "/nas_pic_2.jpeg",
     canonicalUrl,
 }: SEOProps) => {
-    const currentUrl = canonicalUrl || (typeof window !== 'undefined' ? window.location.href : '');
+    const currentUrl = canonicalUrl || (typeof window !== 'undefined' ? window.location.href : 'https://parisperipherie-renovation.fr');
+    const siteUrl = 'https://parisperipherie-renovation.fr';
+    const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
     return (
         <Helmet>
@@ -30,14 +32,16 @@ const SEO = ({
             <meta property="og:url" content={currentUrl} />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
-            <meta property="og:image" content={ogImage} />
+            <meta property="og:image" content={fullOgImage} />
+            <meta property="og:site_name" content="Paris Périphérie Rénovation" />
 
             {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:url" content={currentUrl} />
             <meta property="twitter:title" content={title} />
             <meta property="twitter:description" content={description} />
-            <meta property="twitter:image" content={ogImage} />
+            <meta property="twitter:image" content={fullOgImage} />
+            <meta name="twitter:creator" content="@ParisRenovation" />
         </Helmet>
     );
 };

@@ -145,9 +145,10 @@ const Footer = () => {
           <p className="text-paris-grey/60 text-sm font-light">
             © {new Date().getFullYear()} Paris Périphérie Rénovation. Tous droits réservés.
           </p>
-          <div className="flex gap-8 text-sm">
+          <div className="flex flex-col md:flex-row gap-8 text-sm items-center">
             <a href="#" className="text-paris-grey/60 hover:text-white transition-colors duration-300 font-light">Mentions légales</a>
             <a href="#" className="text-paris-grey/60 hover:text-white transition-colors duration-300 font-light">Politique de confidentialité</a>
+            <a href="https://briqflow.fr" target="_blank" rel="noopener noreferrer" className="text-paris-grey/60 hover:text-white transition-colors duration-300 font-light">Site réalisé par briqflow.fr</a>
           </div>
         </div>
       </div>

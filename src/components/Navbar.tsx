@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { Phone, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
@@ -89,19 +90,29 @@ const Navbar = () => {
             )}
           >
             {[
-              { name: "Pourquoi nous", href: "#pourquoi-nous" },
-              { name: "Expertise", href: "#expertise" },
-              { name: "Réalisations", href: "#réalisations" },
+              { name: "Pourquoi nous", href: "/#pourquoi-nous" },
+              { name: "Expertise", href: "/#expertise" },
+              { name: "Réalisations", href: "/#réalisations" },
               { name: "Blog", href: "/blog" }
             ].map((item, index) => (
               <li key={index}>
-                <a
-                  href={item.href}
-                  className="hover:text-paris-orange transition-colors relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-paris-orange transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                {item.href.startsWith('/') && !item.href.startsWith('/#') ? (
+                  <Link
+                    to={item.href}
+                    className="hover:text-paris-orange transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-paris-orange transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="hover:text-paris-orange transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-paris-orange transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -146,23 +157,37 @@ const Navbar = () => {
         >
           <ul className="flex flex-col gap-8 text-center">
             {[
-              { name: "Pourquoi nous", href: "#pourquoi-nous" },
-              { name: "Expertise", href: "#expertise" },
-              { name: "Réalisations", href: "#réalisations" },
+              { name: "Pourquoi nous", href: "/#pourquoi-nous" },
+              { name: "Expertise", href: "/#expertise" },
+              { name: "Réalisations", href: "/#réalisations" },
               { name: "Blog", href: "/blog" }
             ].map((item, index) => (
               <li key={index} className="overflow-hidden">
-                <a
-                  href={item.href}
-                  className={cn(
-                    "block text-3xl font-light text-white hover:text-paris-orange transition-colors transform translate-y-10 opacity-0",
-                    mobileMenuOpen && "animate-fade-in-up"
-                  )}
-                  style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+                {item.href.startsWith('/') && !item.href.startsWith('/#') ? (
+                  <Link
+                    to={item.href}
+                    className={cn(
+                      "block text-3xl font-light text-white hover:text-paris-orange transition-colors transform translate-y-10 opacity-0",
+                      mobileMenuOpen && "animate-fade-in-up"
+                    )}
+                    style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className={cn(
+                      "block text-3xl font-light text-white hover:text-paris-orange transition-colors transform translate-y-10 opacity-0",
+                      mobileMenuOpen && "animate-fade-in-up"
+                    )}
+                    style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                )}
               </li>
             ))}
             <li className="mt-8">
