@@ -1,7 +1,8 @@
 import emailjs from "@emailjs/browser";
-import { ChevronRight, Clock, Mail, Phone } from "lucide-react";
+import { ChevronRight, Clock, Mail, Phone, ArrowRight } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { EMAILJS_CONFIG } from "../config/emailjs";
+import { cn } from "@/lib/utils";
 
 const ContactCTA = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -21,7 +22,6 @@ const ContactCTA = () => {
   });
 
   useEffect(() => {
-    // Initialize EmailJS
     emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
     const observer = new IntersectionObserver(
@@ -39,8 +39,6 @@ const ContactCTA = () => {
       },
       { threshold: 0.2 }
     );
-
-    console.log(EMAILJS_CONFIG.SERVICE_ID);
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
@@ -105,162 +103,126 @@ const ContactCTA = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="section-padding bg-gradient-to-b from-paris-navy to-paris-navy/90 text-white"
+      className="section-padding bg-paris-navy text-white relative overflow-hidden"
     >
-      <div className="container mx-auto container-padding">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20 reveal">
-            <h2 className="section-title text-white relative inline-block">
-              Prêt à transformer votre espace?
-              <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-paris-orange"></span>
-            </h2>
-            <p className="text-lg text-paris-grey mt-3 leading-relaxed">
-              Obtenez une{" "}
-              <span className="font-medium text-white relative">
-                consultation gratuite
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-paris-orange/30"></span>
-              </span>{" "}
-              et sans engagement pour discuter de votre projet.
-            </p>
-          </div>
+      {/* Background Gradients */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-paris-orange/5 rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3"></div>
 
-          <div className="grid md:grid-cols-2 items-stretch rounded-sm overflow-hidden shadow-xl">
-            <div className="reveal text-white p-10 bg-gradient-to-br from-gray-900 to-gray-900/80 backdrop-blur-sm border-r border-white/5">
-              <h3 className="font-serif text-2xl mb-8 relative inline-block">
-                Contactez-nous
-                <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-paris-orange"></span>
-              </h3>
+      <div className="container mx-auto container-padding relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left Column: Info */}
+          <div className="reveal space-y-12">
+            <div>
+              <h2 className="section-title text-white mb-6">
+                Parlons de votre <br />
+                <span className="text-paris-orange">Projet d'Exception</span>
+              </h2>
+              <p className="text-white/70 text-lg font-light leading-relaxed max-w-md">
+                Chaque rénovation commence par une conversation. Discutons de vos envies et transformons-les en réalité.
+              </p>
+            </div>
 
-              <div className="space-y-8">
-                <div className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-full bg-paris-navy/50 border border-paris-orange/20 group-hover:border-paris-orange transition-colors duration-300">
-                    <Phone className="w-6 h-6 text-paris-orange" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-lg mb-1">Téléphone</p>
-                    <a
-                      href="tel:+33605708376"
-                      className="text-paris-grey hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
-                    >
-                      06 05 70 83 76 <br />
-                      06 66 34 66 39
-                      <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
-                    </a>
-                  </div>
+            <div className="space-y-8">
+              <div className="group flex items-start gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div className="p-3 rounded-full bg-paris-orange/10 text-paris-orange group-hover:scale-110 transition-transform duration-300">
+                  <Phone className="w-6 h-6" />
                 </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-full bg-paris-navy/50 border border-paris-orange/20 group-hover:border-paris-orange transition-colors duration-300">
-                    <Mail className="w-6 h-6 text-paris-orange" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-lg mb-1">Email</p>
-                    <a
-                      href="mailto:contact@parisperipherie-renovation.fr"
-                      className="text-paris-grey hover:text-white transition-colors duration-300 inline-flex items-center gap-2 group/link"
-                    >
-                      pprenov75@gmail.com
-                      <ChevronRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" />
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="p-3 rounded-full bg-paris-navy/50 border border-paris-orange/20 group-hover:border-paris-orange transition-colors duration-300">
-                    <Clock className="w-6 h-6 text-paris-orange" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-lg mb-1">Horaires</p>
-                    <p className="text-paris-grey">
-                      Lun-Ven: 8h-18h <br />
-                      Sam: Sur rendez-vous
-                    </p>
+                <div>
+                  <h3 className="text-lg font-serif mb-2">Téléphone</h3>
+                  <div className="space-y-1">
+                    <a href="tel:+33605708376" className="block text-white/80 hover:text-paris-orange transition-colors">06 05 70 83 76</a>
+                    <a href="tel:+33666346639" className="block text-white/80 hover:text-paris-orange transition-colors">06 66 34 66 39</a>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-white p-10 text-paris-navy reveal">
-              <h3 className="font-serif text-2xl mb-8 relative inline-block">
-                Demande de devis
-                <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-paris-orange"></span>
-              </h3>
+              <div className="group flex items-start gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div className="p-3 rounded-full bg-paris-orange/10 text-paris-orange group-hover:scale-110 transition-transform duration-300">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-serif mb-2">Email</h3>
+                  <a href="mailto:pprenov75@gmail.com" className="text-white/80 hover:text-paris-orange transition-colors">
+                    pprenov75@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="group flex items-start gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                <div className="p-3 rounded-full bg-paris-orange/10 text-paris-orange group-hover:scale-110 transition-transform duration-300">
+                  <Clock className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-serif mb-2">Horaires</h3>
+                  <p className="text-white/80">Lun-Ven: 8h-18h</p>
+                  <p className="text-white/80">Sam: Sur rendez-vous</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Form */}
+          <div className="reveal lg:pt-8">
+            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-2xl">
+              <h3 className="font-serif text-3xl text-paris-navy mb-8">Demander un devis</h3>
+
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Nom
-                    </label>
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium text-paris-navy/80 uppercase tracking-wider">Nom</label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
+                      className="w-full px-0 py-3 border-b border-paris-grey/30 bg-transparent focus:border-paris-orange focus:outline-none transition-colors duration-300 text-paris-navy placeholder:text-paris-grey/40"
                       placeholder="Votre nom"
                       required
                     />
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Téléphone
-                    </label>
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium text-paris-navy/80 uppercase tracking-wider">Téléphone</label>
                     <input
                       type="tel"
                       id="phone"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
-                      placeholder="Votre téléphone"
+                      className="w-full px-0 py-3 border-b border-paris-grey/30 bg-transparent focus:border-paris-orange focus:outline-none transition-colors duration-300 text-paris-navy placeholder:text-paris-grey/40"
+                      placeholder="Votre numéro"
                       required
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Email
-                  </label>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-paris-navy/80 uppercase tracking-wider">Email</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
-                    placeholder="Votre email"
+                    className="w-full px-0 py-3 border-b border-paris-grey/30 bg-transparent focus:border-paris-orange focus:outline-none transition-colors duration-300 text-paris-navy placeholder:text-paris-grey/40"
+                    placeholder="votre@email.com"
                     required
                   />
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="project"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Type de projet
-                  </label>
+                <div className="space-y-2">
+                  <label htmlFor="project" className="text-sm font-medium text-paris-navy/80 uppercase tracking-wider">Projet</label>
                   <select
                     id="project"
                     name="project"
                     value={formData.project}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
+                    className="w-full px-0 py-3 border-b border-paris-grey/30 bg-transparent focus:border-paris-orange focus:outline-none transition-colors duration-300 text-paris-navy"
                     required
                   >
-                    <option value="">Sélectionnez le type de projet</option>
+                    <option value="">Type de projet</option>
                     <option value="apartment">Rénovation d'appartement</option>
                     <option value="house">Rénovation de maison</option>
                     <option value="commercial">Espace commercial</option>
@@ -268,54 +230,40 @@ const ContactCTA = () => {
                   </select>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Message
-                  </label>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium text-paris-navy/80 uppercase tracking-wider">Message</label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-paris-grey/30 rounded-sm focus:outline-none focus:border-paris-navy focus:ring-1 focus:ring-paris-navy/20 transition-all duration-300"
+                    rows={3}
+                    className="w-full px-0 py-3 border-b border-paris-grey/30 bg-transparent focus:border-paris-orange focus:outline-none transition-colors duration-300 text-paris-navy placeholder:text-paris-grey/40 resize-none"
                     placeholder="Décrivez votre projet..."
                     required
                   ></textarea>
                 </div>
 
                 {formStatus.message && (
-                  <div
-                    className={`p-4 rounded-sm ${
-                      formStatus.type === "success"
-                        ? "bg-green-50 text-green-800"
-                        : "bg-red-50 text-red-800"
-                    }`}
-                  >
+                  <div className={cn(
+                    "p-4 rounded-lg text-sm",
+                    formStatus.type === "success" ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
+                  )}>
                     {formStatus.message}
                   </div>
                 )}
 
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full py-4 bg-paris-navy hover:bg-paris-orange text-white font-medium rounded-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg ${
-                      isSubmitting ? "opacity-75 cursor-not-allowed" : ""
-                    }`}
-                  >
-                    {isSubmitting
-                      ? "Envoi en cours..."
-                      : "Demander un devis gratuit"}
-                  </button>
-                  <p className="text-sm text-paris-grey mt-4 text-center">
-                    Notre agenda se remplit rapidement — sécurisez votre projet
-                    dès maintenant.
-                  </p>
-                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full group relative px-8 py-4 bg-paris-navy text-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  <div className="absolute inset-0 bg-paris-orange transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></div>
+                  <span className="relative z-10 flex items-center justify-center gap-2 font-medium tracking-wide">
+                    {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
+                    {!isSubmitting && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                  </span>
+                </button>
               </form>
             </div>
           </div>
